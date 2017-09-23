@@ -1,8 +1,8 @@
 package MissionTypes;
+
 import General.UnitWrapper;
-
-
 import com.orbischallenge.firefly.client.objects.models.Tile;
+import com.orbischallenge.firefly.objects.enums.Direction;
 
 import java.util.Comparator;
 
@@ -15,7 +15,14 @@ public abstract class Mission implements Comparator<UnitWrapper> {
     float priority;
     Tile destination;
 
-    public UnitWrapper x;
+    public abstract void onDelete();
 
+    public abstract void onLocationReached();
+
+    public abstract Direction getMoveDirection();
+
+    public float getPriority() {
+        return priority;
+    }
 
 }
