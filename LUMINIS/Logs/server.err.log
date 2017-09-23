@@ -1,0 +1,12 @@
+[5585865271] Error running game: 
+[5585865271] java.net.BindException: Address already in use: JVM_Bind
+[5585865271] 	at java.net.DualStackPlainSocketImpl.bind0(Native Method)
+[5585865271] 	at java.net.DualStackPlainSocketImpl.socketBind(Unknown Source)
+[5585865271] 	at java.net.AbstractPlainSocketImpl.bind(Unknown Source)
+[5585865271] 	at java.net.PlainSocketImpl.bind(Unknown Source)
+[5585865271] 	at java.net.ServerSocket.bind(Unknown Source)
+[5585865271] 	at java.net.ServerSocket.<init>(Unknown Source)
+[5585865271] 	at java.net.ServerSocket.<init>(Unknown Source)
+[5585865271] 	at com.orbischallenge.communication.server.ServerSocketChannelProvider.start(ServerSocketChannelProvider.java:26)
+[5585865271] 	at com.orbischallenge.communication.server.CommunicationServer.awaitAllClientConnections(CommunicationServer.java:44)
+[5585865271] 	at com.orbischallenge.firefly.server.RunServer.main(RunServer.java:32)
