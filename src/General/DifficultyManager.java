@@ -15,15 +15,9 @@ public class DifficultyManager {
 
     }
 
-    public Difficulty getDifference(Tile t){
-        if (!t.isNeutral()){
-
-        }
-        Difficulty temp = tileScores.getOrDefault(t, null);
-        if(temp !=null){
-            return temp;
-        }
-
+    public Difficulty getDifficulty(Tile t){
+        if (!tileScores.containsKey(t)) tileScores.put(t, new Difficulty(t, world));
+        return tileScores.get(t);
     }
 }
 
