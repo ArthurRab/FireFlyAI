@@ -1,1 +1,1 @@
-{"mapName":"Open Map","playerPaths":["Bots/PlayerAI.java","Bots/PlayerAI.java"],"maxResponseTime":600,"turnLimit":250,"portNumber":4461,"serverTimeout":0,"playerLaunchTypes":["AI","AI"]}
+{"mapName":"Open Map","playerPaths":["C:/Users/Alienwarepc/Desktop/FireFlyAI/src/PlayerAI.java","Bots/PlayerAI.java"],"maxResponseTime":600,"turnLimit":250,"portNumber":4461,"serverTimeout":0,"playerLaunchTypes":["AI","AI"]}

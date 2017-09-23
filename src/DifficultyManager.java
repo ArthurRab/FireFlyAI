@@ -10,14 +10,25 @@ import com.orbischallenge.logging.Log;
 
 import java.util.*;
 
-public class Difficulty implements Comparable<Difficulty>{
-    private boolean possible;
+public class DifficultyManager {
+    private HashMap<Tile, Difficulty> tileScores = new HashMap<Tile, Difficulty>();
+    private World world;
 
-    @Override
-    public int compareTo(Difficulty o) {
-        if (o == WORST_DIFFICULTY){
-            return 1;
+    public void update(World world){
+        this.world = world;
+        tileScores.clear();
+
+    }
+
+    public Difficulty getDifference(Tile t){
+        if (!t.isNeutral()){
+
         }
-        return 0;
+        Difficulty temp = tileScores.getOrDefault(t, null);
+        if(temp !=null){
+            return temp;
+        }
+
     }
 }
+
