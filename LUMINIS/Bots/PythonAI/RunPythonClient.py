@@ -77,9 +77,9 @@ if __name__ == '__main__':
     cache = NavigationCache.navigation_cache
     UUIDForAi = constants.LOCAL_PLAYER_UUID
     print("Welcome " + UUIDForAi)
-    fp, pathname, description = imp.find_module('PlayerAI', [constants.PLAYER_AI_PATH])
-    player_ai_module = imp.load_module('PlayerAI', fp, pathname, description)
-    client_ai = player_ai_module.PlayerAI()
+    fp, pathname, description = imp.find_module('General.PlayerAI', [constants.PLAYER_AI_PATH])
+    player_ai_module = imp.load_module('General.PlayerAI', fp, pathname, description)
+    client_ai = player_ai_module.General.PlayerAI()
     client_handler_protocol = ClientHandlerProtocol(client_ai, cc.PORT_NUMBER, cc.MAXIMUM_ALLOWED_RESPONSE_TIME,
                                                     UUIDForAi)
 

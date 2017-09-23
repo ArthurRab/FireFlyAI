@@ -184,14 +184,14 @@
 <div class="tldr admonition">
 <p class="first admonition-title">TL;DR</p>
 <blockquote class="last">
-<div><p>Your task is to implement the playerAi.do_move(world, friendlies, enemies) function in the PlayerAI.java file. The do_move function is invoked at each turn in the game. The PlayerAI class is instantialized just once at the beginning of the game, and that instance is used for the rest of the game.</p>
-<p>We’ve provided some cool API that you can use in your do_move function. For example, use <strong>world.move(unit, target)</strong> to move a unit one point closer to any point on the map. You can see the actual result of your <strong>previous</strong> move with <strong>friendly_unit.last_move_result</strong>. Don’t store a FriendlyUnit object in your PlayerAI instance, because it’ll soon have outdated fields. You can keep track of a unit across turns by saving its unique UUID somewhere in your PlayerAI instance and retrieving the actual unit with <strong>world.get_unit(uuid)</strong>.</p>
+<div><p>Your task is to implement the playerAi.do_move(world, friendlies, enemies) function in the General.PlayerAI.java file. The do_move function is invoked at each turn in the game. The General.PlayerAI class is instantialized just once at the beginning of the game, and that instance is used for the rest of the game.</p>
+<p>We’ve provided some cool API that you can use in your do_move function. For example, use <strong>world.move(unit, target)</strong> to move a unit one point closer to any point on the map. You can see the actual result of your <strong>previous</strong> move with <strong>friendly_unit.last_move_result</strong>. Don’t store a FriendlyUnit object in your General.PlayerAI instance, because it’ll soon have outdated fields. You can keep track of a unit across turns by saving its unique UUID somewhere in your General.PlayerAI instance and retrieving the actual unit with <strong>world.get_unit(uuid)</strong>.</p>
 <p>There are other API for you to experiment with, such as <strong>world.get_shortest_path</strong>, <strong>world.get_closest_capturable_tile_from</strong>, <strong>world.get_enemy_nest_clusters</strong>. Have fun!</p>
 </div></blockquote>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Don’t change the function definition for do_move. This function is called by the client code (which you also shouldn’t modify) because when you submit your file only your PlayerAI file and any additional libraries are kept and any client code is removed. Thus, if you change the method, your code will cause an Exception and ultimately invalidate all of your work.</p>
+<p class="last">Don’t change the function definition for do_move. This function is called by the client code (which you also shouldn’t modify) because when you submit your file only your General.PlayerAI file and any additional libraries are kept and any client code is removed. Thus, if you change the method, your code will cause an Exception and ultimately invalidate all of your work.</p>
 </div>
 <div class="section" id="the-basics">
 <h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
@@ -203,8 +203,8 @@
 <span class="c1"># All units have a unique UUID that you can track them by</span>
 <span class="n">uuid</span> <span class="o">=</span> <span class="n">friendly_unit</span><span class="o">.</span><span class="n">uuid</span>
 <span class="k">print</span><span class="p">(</span><span class="n">friendly_unit_a</span> <span class="o">==</span> <span class="n">friendly_unit_b</span><span class="p">)</span> <span class="c1"># returns True if and only if friendly_unit_a and friendly_unit_b have the same UUID</span>
-<span class="c1"># If you&#39;ve saved a unit&#39;s UUID in your PlayerAI instance, you can locate it using the World.get_unit(uuid)</span>
-<span class="c1"># For example, say that you have a list of uuids in self.saved_uuids, where self is the PlayerAI instance</span>
+<span class="c1"># If you&#39;ve saved a unit&#39;s UUID in your General.PlayerAI instance, you can locate it using the World.get_unit(uuid)</span>
+<span class="c1"># For example, say that you have a list of uuids in self.saved_uuids, where self is the General.PlayerAI instance</span>
 <span class="k">for</span> <span class="n">uuid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_uuids</span><span class="p">:</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="n">get_unit</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">unit</span><span class="p">:</span> <span class="c1"># Make sure that the saved unit is still alive!</span>

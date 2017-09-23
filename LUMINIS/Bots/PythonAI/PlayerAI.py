@@ -3,7 +3,7 @@ from PythonClientAPI.Game.Entities import FriendlyUnit, EnemyUnit, Tile
 from PythonClientAPI.Game.Enums import Direction, MoveType, MoveResult
 from PythonClientAPI.Game.World import World
 
-class PlayerAI:
+class General.PlayerAI:
 
     def __init__(self):
         """

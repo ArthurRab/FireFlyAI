@@ -1,3 +1,5 @@
+package General;
+
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
@@ -10,14 +12,5 @@ import com.orbischallenge.logging.Log;
 
 import java.util.*;
 
-public class Difficulty implements Comparable<Difficulty>{
-    private boolean possible;
-
-    @Override
-    public int compareTo(Difficulty o) {
-        if (o == WORST_DIFFICULTY){
-            return 1;
-        }
-        return 0;
-    }
+public class MissionManager {
 }

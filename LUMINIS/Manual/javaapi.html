@@ -184,14 +184,14 @@
 <div class="tldr admonition">
 <p class="first admonition-title">TL;DR</p>
 <blockquote class="last">
-<div><p>Your task is to implement the playerAi.doMove(World world, FriendlyUnit[] friendlies, EnemyUnit[] enemies) function in the PlayerAI.java file. The doMove function is invoked at each turn in the game. The PlayerAI class is instantialized just once at the beginning of the game, and that instance is used for the rest of the game.</p>
-<p>We’ve provided some cool API that you can use in your doMove function. For example, use <strong>world.move(FriendlyUnit unit, Point target)</strong> to move a unit one point closer to any point on the map. You can see the actual result of your <strong>previous</strong> move with <strong>friendlyUnit.getLastMoveResult()</strong>. Don’t store a FriendlyUnit object in your PlayerAI instance, because it’ll soon have outdated fields. You can keep track of a unit across turns by saving its unique UUID somewhere in your PlayerAI instance and retrieving the actual unit with <strong>world.getUnit(String uuid)</strong>.</p>
+<div><p>Your task is to implement the playerAi.doMove(World world, FriendlyUnit[] friendlies, EnemyUnit[] enemies) function in the General.PlayerAI.java file. The doMove function is invoked at each turn in the game. The General.PlayerAI class is instantialized just once at the beginning of the game, and that instance is used for the rest of the game.</p>
+<p>We’ve provided some cool API that you can use in your doMove function. For example, use <strong>world.move(FriendlyUnit unit, Point target)</strong> to move a unit one point closer to any point on the map. You can see the actual result of your <strong>previous</strong> move with <strong>friendlyUnit.getLastMoveResult()</strong>. Don’t store a FriendlyUnit object in your General.PlayerAI instance, because it’ll soon have outdated fields. You can keep track of a unit across turns by saving its unique UUID somewhere in your General.PlayerAI instance and retrieving the actual unit with <strong>world.getUnit(String uuid)</strong>.</p>
 <p>There are other API for you to experiment with, such as <strong>world.getShortestPath</strong>, <strong>world.getClosestCapturableTileFrom</strong>, <strong>world.getEnemyNestClusters</strong>. Have fun!</p>
 </div></blockquote>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Don’t change the function definition for doMove. This function is called by the client code (which you also shouldn’t modify) because when you submit your file only your PlayerAI file and any additional libraries are kept and any client code is removed. Thus, if you change the method, your code will cause an Exception and ultimately invalidate all of your work.</p>
+<p class="last">Don’t change the function definition for doMove. This function is called by the client code (which you also shouldn’t modify) because when you submit your file only your General.PlayerAI file and any additional libraries are kept and any client code is removed. Thus, if you change the method, your code will cause an Exception and ultimately invalidate all of your work.</p>
 </div>
 <div class="section" id="the-basics">
 <h2>The basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
@@ -204,8 +204,8 @@
 <span class="c1">// All units have a unique UUID that you can track them by.</span>
 <span class="n">friendlyUnit</span><span class="o">.</span><span class="na">getUuid</span><span class="o">()</span> <span class="c1">// returns the unit&#39;s unique UUID</span>
 <span class="n">friendlyUnitA</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">friendlyUnitB</span><span class="o">)</span> <span class="c1">// returns true if and only if friendlyUnitA and friendlyUnitB have the same UUID</span>
-<span class="c1">// If you&#39;ve saved a unit&#39;s UUID in your PlayerAI instance, you can locate it using World.getUnit(String uuid)</span>
-<span class="c1">// For example, say that you have a List of uuids in this.savedUuids, where this is the PlayerAI instance</span>
+<span class="c1">// If you&#39;ve saved a unit&#39;s UUID in your General.PlayerAI instance, you can locate it using World.getUnit(String uuid)</span>
+<span class="c1">// For example, say that you have a List of uuids in this.savedUuids, where this is the General.PlayerAI instance</span>
 <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">uuid</span><span class="o">:</span> <span class="n">savedUuids</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">FriendlyUnit</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">getUnit</span><span class="o">(</span><span class="n">uuid</span><span class="o">);</span>
         <span class="k">if</span> <span class="o">(</span><span class="n">unit</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span> <span class="c1">// Make sure that the saved unit is still alive!</span>
