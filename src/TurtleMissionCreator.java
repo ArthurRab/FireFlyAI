@@ -1,6 +1,5 @@
-import com.orbischallenge.game.engine.Point;
-
 public class TurtleMissionCreator implements MissionCreator {
+<<<<<<< HEAD
     Point topLeft, bottomRight;
 
     public TurtleMissionCreator(Point start) {
@@ -16,11 +15,12 @@ public class TurtleMissionCreator implements MissionCreator {
         }
         topLeft = start.add(new Point(minX, minY)).getMod(PlayerAI.world.getWidth(), PlayerAI.world.getHeight());
         bottomRight = start.add(new Point(maxX, maxY)).getMod(PlayerAI.world.getWidth(), PlayerAI.world.getHeight());
+=======
+>>>>>>> parent of 99f6931... TURTLE
 
-        mx = (topLeft.getX() + bottomRight.getX()) / 2f;
-        my = (topLeft.getY() + bottomRight.getY()) / 2f;
 
 
+<<<<<<< HEAD
         for (int i = topLeft.getX(); i <= bottomRight.getX(); i++) {
             for (int j = topLeft.getY(); j <= bottomRight.getY(); j++) {
                 float temp = ((i - mx) * (i - mx) + (j - my) * (j - my));
@@ -28,6 +28,8 @@ public class TurtleMissionCreator implements MissionCreator {
             }
         }
     }
+=======
+>>>>>>> parent of 99f6931... TURTLE
 
     @Override
     public void makeMissions() {

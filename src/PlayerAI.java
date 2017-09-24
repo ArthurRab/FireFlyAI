@@ -3,13 +3,20 @@ import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.game.engine.Point;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.*;
 =======
 >>>>>>> parent of 15408c8... changes
+=======
+=======
+import java.util.*;
+>>>>>>> origin/master
+>>>>>>> parent of 99f6931... TURTLE
 
 public class PlayerAI {
     // Any field declarations go here
@@ -68,17 +75,22 @@ public class PlayerAI {
 <<<<<<< HEAD
 
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
-
+<<<<<<< HEAD
         if (turns <= 0) {
+            AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
+            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 8);
+=======
+        if (turns <= 0){
             Point start = world.getFriendlyNestPositions()[0];
             AVOID_AT_ALL_COSTS.add(start);
-            nests = nlf.findNestLocations(PlayerAI.world, start, 20);
+            nests = nlf.findNestLocations(PlayerAI.world,start, 20);
             Collections.sort(nests, (o1, o2) -> {
                 Point diff1 = o1.subtract(start).getMod(world.getWidth(), world.getHeight()),
-                        diff2 = o2.subtract(start).getMod(world.getWidth(), world.getHeight());
+                diff2 = o2.subtract(start).getMod(world.getWidth(), world.getHeight());
                 return Math.max(Math.abs(diff1.getX()), Math.abs(diff1.getY()))
                         - Math.max(Math.abs(diff2.getX()), Math.abs(diff2.getY()));
             });
+<<<<<<< HEAD
             nests = nests.subList(0, 8);
 
 =======
@@ -87,6 +99,10 @@ public class PlayerAI {
             AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
             nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
 >>>>>>> parent of 8faffbb... debugging
+=======
+            nests = nests.subList(0,8);
+>>>>>>> origin/master
+>>>>>>> parent of 99f6931... TURTLE
             AVOID_AT_ALL_COSTS.addAll(nests);
 =======
         if (turns == 0) {
@@ -97,20 +113,29 @@ public class PlayerAI {
                 break;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> parent of 99f6931... TURTLE
             //System.out.println(MissionManager.getInstance().pendingMissions.size());
             System.out.println("NESTS:");
             //for (Point m: nests) System.out.println(m);
             for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
             System.out.println();
+<<<<<<< HEAD
 =======
             System.out.println(MissionManager.getInstance().pendingMissions.size());
             System.out.println(MissionManager.getInstance().pendingMissions.peek().getDestination());
 >>>>>>> parent of 15408c8... changes
+=======
+>>>>>>> origin/master
+>>>>>>> parent of 99f6931... TURTLE
         }
 
         MissionManager.getInstance().distributeMissions();
 <<<<<<< HEAD
         for (Mission m : MissionManager.getInstance().saveForLater) {
+<<<<<<< HEAD
             System.out.println(MissionManager.getInstance().pendingMissions.size());
             System.out.println(MissionManager.getInstance().saveForLater.size());
             //System.out.println("==DESTS==");
@@ -122,8 +147,18 @@ public class PlayerAI {
         System.out.println(MissionManager.getInstance().pendingMissions.size());
         System.out.println(MissionManager.getInstance().saveForLater.size());
 >>>>>>> parent of 15408c8... changes
+=======
+=======
+        System.out.println(MissionManager.getInstance().pendingMissions.size());
+        System.out.println(MissionManager.getInstance().saveForLater.size());
+        //System.out.println("==DESTS==");
+        //for (Mission m: MissionManager.getInstance().saveForLater){
+         //   System.out.println(m.getDestination());
+        //}
+        //System.out.println();
+>>>>>>> parent of 99f6931... TURTLE
 
-            System.out.println(PlayerAI.friendlyUnits.size());
+        System.out.println(PlayerAI.friendlyUnits.size());
 
 
         for (FriendlyUnit u : friendlyUnits) {
@@ -136,7 +171,11 @@ public class PlayerAI {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             for (UnitWrapper i : PlayerAI.friendlyUnits) {
+=======
+        for (UnitWrapper i : PlayerAI.friendlyUnits) {
+>>>>>>> parent of 99f6931... TURTLE
             /*if (i.getMission() == null){
                 System.out.println("INACTIVE");
                 System.out.println(i.getPosition());
@@ -147,6 +186,7 @@ public class PlayerAI {
                 System.out.println(((GoToLocationMission) i.getMission()).getPath());
                 System.out.println();
             }*/
+<<<<<<< HEAD
                 i.update();
             }
 =======
@@ -170,9 +210,13 @@ public class PlayerAI {
         }*/
         turns += 1;
 >>>>>>> parent of 15408c8... changes
-
-            turns += 1;
-
+=======
+            i.update();
+>>>>>>> origin/master
         }
+>>>>>>> parent of 99f6931... TURTLE
+
+        turns += 1;
+
     }
 }
