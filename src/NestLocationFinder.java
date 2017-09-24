@@ -9,15 +9,13 @@ import java.util.*;
 public class NestLocationFinder {
     HashSet<Point> allDirections;
 
-<<<<<<< HEAD
-    public ArrayList<Point> findNestLocations(World world, Point start, int numNests) {
-=======
-    public NestLocationFinder(){
+
+    public NestLocationFinder() {
         allDirections = new HashSet<>();
-        Point zero = new Point(0,0);
-        for (Direction d: Direction.getOrderedDirections()){
-            for (Direction e: Direction.getOrderedDirections()){
-                if (d != e && d.getDirectionDelta().add(e.getDirectionDelta()) != zero){
+        Point zero = new Point(0, 0);
+        for (Direction d : Direction.getOrderedDirections()) {
+            for (Direction e : Direction.getOrderedDirections()) {
+                if (d != e && d.getDirectionDelta().add(e.getDirectionDelta()) != zero) {
                     allDirections.add(d.getDirectionDelta().add(e.getDirectionDelta()));
                 }
             }
@@ -28,16 +26,15 @@ public class NestLocationFinder {
         System.out.println();
     }
 
-    public List<Point> findNestLocations(World world, Point start, int numNests){
->>>>>>> origin/master
+    public List<Point> findNestLocations(World world, Point start, int numNests) {
 
         ArrayList nests = new ArrayList<Point>();
         HashSet<Point> visited = new HashSet<>();
 
 
-        for (Point p: PlayerAI.AVOID_AT_ALL_COSTS){
+        for (Point p : PlayerAI.AVOID_AT_ALL_COSTS) {
             nests.add(p);
-            for (Point d : allDirections){
+            for (Point d : allDirections) {
                 Point a = p.add(d).getMod(world.getWidth(), world.getHeight());
                 visited.add(a);
             }
@@ -45,12 +42,8 @@ public class NestLocationFinder {
 
         int initLen = nests.size();
         int counter = 0;
-<<<<<<< HEAD
-        while (nests.size() < initLen + numNests && counter < 10) {
-=======
->>>>>>> origin/master
 
-        while (nests.size() < initLen + numNests && counter < 20){
+        while (nests.size() < initLen + numNests && counter < 20) {
             System.out.println();
             System.out.println(start);
             System.out.print("VISTIED: ");
@@ -59,12 +52,8 @@ public class NestLocationFinder {
             System.out.println(counter);
             System.out.println();
             Tile t = world.getClosestNeutralTileFrom(start, visited);
-<<<<<<< HEAD
             if (t == null) {
-=======
-            if (t == null){
 
->>>>>>> origin/master
                 return nests;
             }
             Point newPoint = t.getPosition();
@@ -96,11 +85,7 @@ public class NestLocationFinder {
         return nests.subList(initLen, nests.size());
     }
 
-<<<<<<< HEAD
-    public HashSet<Point> getNeighbours(World world, ArrayList<Point> nests) {
-=======
-    public HashSet<Point> getNeighbours(World world, List<Point> nests){
->>>>>>> origin/master
+    public HashSet<Point> getNeighbours(World world, List<Point> nests) {
         HashSet<Point> neighbours = new HashSet();
         for (Point n : nests) {
             for (Direction d : Direction.getOrderedDirections()) {
@@ -111,11 +96,7 @@ public class NestLocationFinder {
         return neighbours;
     }
 
-<<<<<<< HEAD
-    public List<List<Point>> createPaths(World world, Point start, ArrayList<Point> nests) {
-=======
-    public List<List<Point>> createPaths(World world, Point start, List<Point> nests){
->>>>>>> origin/master
+    public List<List<Point>> createPaths(World world, Point start, List<Point> nests) {
         HashSet<Point> neighbours = getNeighbours(world, nests);
         ArrayList<List<Point>> paths = new ArrayList();
         HashSet<List<Point>> removedPaths = new HashSet();

@@ -3,13 +3,10 @@ import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.game.engine.Point;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-=======
 import java.util.*;
->>>>>>> origin/master
 
 public class PlayerAI {
     // Any field declarations go here
@@ -68,52 +65,42 @@ public class PlayerAI {
         }
 
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
-<<<<<<< HEAD
+
         if (turns <= 0) {
-            AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
-            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 8);
-=======
-        if (turns <= 0){
             Point start = world.getFriendlyNestPositions()[0];
             AVOID_AT_ALL_COSTS.add(start);
-            nests = nlf.findNestLocations(PlayerAI.world,start, 20);
+            nests = nlf.findNestLocations(PlayerAI.world, start, 20);
             Collections.sort(nests, (o1, o2) -> {
                 Point diff1 = o1.subtract(start).getMod(world.getWidth(), world.getHeight()),
-                diff2 = o2.subtract(start).getMod(world.getWidth(), world.getHeight());
+                        diff2 = o2.subtract(start).getMod(world.getWidth(), world.getHeight());
                 return Math.max(Math.abs(diff1.getX()), Math.abs(diff1.getY()))
                         - Math.max(Math.abs(diff2.getX()), Math.abs(diff2.getY()));
             });
-            nests = nests.subList(0,8);
->>>>>>> origin/master
+            nests = nests.subList(0, 8);
             AVOID_AT_ALL_COSTS.addAll(nests);
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
 
             }
-<<<<<<< HEAD
-=======
             //System.out.println(MissionManager.getInstance().pendingMissions.size());
             //System.out.println("NESTS:");
             //for (Point m: nests) System.out.println(m);
             //for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
             System.out.println();
->>>>>>> origin/master
         }
 
 
         MissionManager.getInstance().distributeMissions();
-<<<<<<< HEAD
         for (Mission m : MissionManager.getInstance().saveForLater) {
-=======
-        System.out.println(MissionManager.getInstance().pendingMissions.size());
-        System.out.println(MissionManager.getInstance().saveForLater.size());
-        //System.out.println("==DESTS==");
-        //for (Mission m: MissionManager.getInstance().saveForLater){
-         //   System.out.println(m.getDestination());
-        //}
-        //System.out.println();
+            System.out.println(MissionManager.getInstance().pendingMissions.size());
+            System.out.println(MissionManager.getInstance().saveForLater.size());
+            //System.out.println("==DESTS==");
+            //for (Mission m: MissionManager.getInstance().saveForLater){
+            //   System.out.println(m.getDestination());
+            //}
+            //System.out.println();
 
-        System.out.println(PlayerAI.friendlyUnits.size());
+            System.out.println(PlayerAI.friendlyUnits.size());
 
 /*
         for (FriendlyUnit u : friendlyUnits) {
@@ -126,7 +113,7 @@ public class PlayerAI {
         }
 */
 
-        for (UnitWrapper i : PlayerAI.friendlyUnits) {
+            for (UnitWrapper i : PlayerAI.friendlyUnits) {
             /*if (i.getMission() == null){
                 System.out.println("INACTIVE");
                 System.out.println(i.getPosition());
@@ -137,11 +124,11 @@ public class PlayerAI {
                 System.out.println(((GoToLocationMission) i.getMission()).getPath());
                 System.out.println();
             }*/
-            i.update();
->>>>>>> origin/master
+                i.update();
+            }
+
+            turns += 1;
+
         }
-
-        turns += 1;
-
     }
 }
