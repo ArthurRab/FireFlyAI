@@ -13,12 +13,12 @@ import java.util.*;
 
 public class NestLocationFinder {
 
-    public ArrayList<Point> findNestLocations(World world, Point start){
+    public ArrayList<Point> findNestLocations(World world, Point start, int numNests){
 
         ArrayList nests = new ArrayList<Point>();
         ArrayList visited = new ArrayList<Point>();
         int counter = 0;
-        while (nests.size() < 4 && counter < 10){
+        while (nests.size() < numNests && counter < 10){
             Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
             visited.add(newPoint);
             nests.add(newPoint);
@@ -33,7 +33,13 @@ public class NestLocationFinder {
                 }
             }
             if (fail || pathSum > 15) nests.remove(newPoint);
-            counter += 1;
+            else {
+                for (Direction d : Direction.getOrderedDirections()) {
+                    Point a = newPoint.add(d.getDirectionDelta());
+                    visited.add(a);
+                }
+                counter += 1;
+            }
         }
 
         return nests;
