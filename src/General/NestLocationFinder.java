@@ -17,7 +17,8 @@ public class NestLocationFinder {
 
         ArrayList nests = new ArrayList<Point>();
         ArrayList visited = new ArrayList<Point>();
-        while (nests.size() < 4){
+        int counter = 0;
+        while (nests.size() < 4 && counter < 10){
             Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
             visited.add(newPoint);
             nests.add(newPoint);
@@ -32,6 +33,7 @@ public class NestLocationFinder {
                 }
             }
             if (fail || pathSum > 15) nests.remove(newPoint);
+            counter += 1;
         }
 
         return nests;
