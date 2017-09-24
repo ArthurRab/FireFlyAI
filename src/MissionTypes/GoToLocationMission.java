@@ -2,6 +2,7 @@ package MissionTypes;
 
 import General.PlayerAI;
 import General.UnitWrapper;
+import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.firefly.objects.enums.Direction;
 import com.orbischallenge.game.engine.Point;
 
@@ -10,6 +11,10 @@ import java.util.List;
 public class GoToLocationMission extends Mission {
     List<Point> path;
     List<Direction> directions;
+
+    public GoToLocationMission(Tile d, float p) {
+        super(d, p);
+    }
 
     public void onStart() {
         path = PlayerAI.world.getShortestPath(getWorker().getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);

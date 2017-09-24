@@ -19,6 +19,10 @@ public abstract class Mission implements Comparator<UnitWrapper> {
     private float priority;
     private Tile destination;
 
+    public Mission(Tile d, float p) {
+        destination = d;
+        priority = p;
+    }
 
     private UnitWrapper worker;
 

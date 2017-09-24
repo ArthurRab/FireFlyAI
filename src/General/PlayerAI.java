@@ -1,10 +1,13 @@
 package General;
 
+import MissionTypes.FillLocationMission;
+import MissionTypes.MissionManager;
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.game.engine.Point;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -17,8 +20,13 @@ public class PlayerAI {
 
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
 
+    NestLocationFinder nlf = new NestLocationFinder();
+    ArrayList<Point> nests;
+
     public PlayerAI() {
         // Any instantiation code goes here
+
+
     }
 
     int turns = 0;
@@ -34,6 +42,7 @@ public class PlayerAI {
 
     public void doMove(World world, FriendlyUnit[] friendlyUnits, EnemyUnit[] enemyUnits) {
         PlayerAI.world = world;
+        MissionManager.getInstance().update();
         UnitWrapper[] fUnits = new UnitWrapper[friendlyUnits.length];
         for (FriendlyUnit f : friendlyUnits) {
             UnitWrapper w = unitIDToWrapper.getOrDefault(f.getUuid(), null);
@@ -44,6 +53,14 @@ public class PlayerAI {
         }
 
         PlayerAI.friendlyUnits = fUnits;
+        if (turns == 0) {
+            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
+            for (Point p : nlf.getNeighbours(world, nests)) {
+                MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
+            }
+        }
+
+
 
 
         /* Fly away to freedom, daring fireflies

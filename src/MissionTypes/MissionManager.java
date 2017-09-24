@@ -18,12 +18,12 @@ public class MissionManager {
     }
 
     private MissionManager() {
-        pendingMissions = saveForLater;
-        saveForLater = new PriorityQueue<Mission>(0, new MissionPriorityComparator());
+
     }
 
     public void update() {
-
+        pendingMissions = saveForLater;
+        saveForLater = new PriorityQueue<Mission>(0, new MissionPriorityComparator());
     }
 
     public PriorityQueue<Mission> pendingMissions = new PriorityQueue<Mission>(0, new MissionPriorityComparator());

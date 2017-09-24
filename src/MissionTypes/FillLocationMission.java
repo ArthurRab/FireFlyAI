@@ -2,9 +2,14 @@ package MissionTypes;
 
 import General.PlayerAI;
 import General.UnitWrapper;
+import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
 public class FillLocationMission extends GoToLocationMission {
+
+    public FillLocationMission(Tile d, float p) {
+        super(d, p);
+    }
 
     @Override
     public Point getMoveDirection() {
