@@ -1,21 +1,20 @@
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
-import com.orbischallenge.firefly.client.objects.models.Unit;
 import com.orbischallenge.game.engine.Point;
 
 import java.util.ArrayList;
 
 public class UnitWrapper {
     private Mission mission;
-    private FriendlyUnit unit;
+    private String unitID;
     public ArrayList<Float> comparisonValues;
 
     public UnitWrapper() {
         comparisonValues = new ArrayList<>();
     }
 
-    public UnitWrapper(FriendlyUnit unit) {
+    public UnitWrapper(String ID) {
         this();
-        setUnit(unit);
+        setUnitID(ID);
     }
 
     public Mission getMission() {
@@ -37,31 +36,31 @@ public class UnitWrapper {
         m.onDelete();
     }
 
-
-    public Unit getUnit() {
-        return unit;
+    private FriendlyUnit getUnit() {
+        return PlayerAI.world.getUnit(unitID);
     }
 
-    public void setUnit(FriendlyUnit unit) {
-        this.unit = unit;
+
+    public void setUnitID(String id) {
+        unitID = id;
     }
 
     public int getHealth() {
-        return unit.getHealth();
+        return getUnit().getHealth();
     }
 
     public Point getPosition() {
-        return unit.getPosition();
+        return getUnit().getPosition();
     }
 
-    public void update(){
-        if(mission!=null){
-            PlayerAI.world.move(unit, mission.getMovePosition());
-        }else{
-            PlayerAI.world.move(unit, unit.getPosition());
+    public void update() {
+        if (mission != null) {
+            PlayerAI.world.move(getUnit(), mission.getMovePosition());
+        } else {
+            PlayerAI.world.move(getUnit(), getUnit().getPosition());
         }
 
-        if(mission!=null && mission.isCompleted()){
+        if (mission != null && mission.isCompleted()) {
             deleteMission();
         }
     }
