@@ -63,6 +63,7 @@ public class PlayerAI {
                 unitIDToWrapper.remove(i);
             }
         }
+<<<<<<< HEAD
 
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
 
@@ -78,6 +79,12 @@ public class PlayerAI {
             });
             nests = nests.subList(0, 8);
 
+=======
+        if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
+        //if (turns == 0){
+            AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
+            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
+>>>>>>> parent of 8faffbb... debugging
             AVOID_AT_ALL_COSTS.addAll(nests);
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
