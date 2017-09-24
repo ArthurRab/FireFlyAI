@@ -39,27 +39,18 @@ public class GoToLocationMission extends Mission {
             return path.get(1);
 =======
         Point playerPos = getWorker().getPosition();
-        int index;
-        if (path.contains(playerPos)) {
-            index = path.indexOf(playerPos);
-        }
-        else{
-            PlayerAI.world.getShortestPath(getWorker().getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
-            path.add(0, getWorker().getPosition());
-            index = 0;
-        }
+        int index = path.indexOf(playerPos);
         /*
         System.out.println();
         System.out.println(getWorker().getUnit().getUuid());
         System.out.println(getWorker().getPosition());
         System.out.println(path);
         System.out.println(index);
-
+        path = path.subList(index, path.size());
         System.out.println(path);
         System.out.println(path.get(1));
         System.out.println();
         */
-        path = path.subList(index, path.size());
         if (path.size() == 1) {
             setCompleted(true);
             return playerPos;
@@ -68,10 +59,6 @@ public class GoToLocationMission extends Mission {
 
         return path.get(1);
 
-    }
-
-    public List<Point> getPath(){
-        return path;
     }
 
     @Override

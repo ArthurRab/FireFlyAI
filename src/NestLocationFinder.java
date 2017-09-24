@@ -1,4 +1,3 @@
-import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.firefly.client.objects.models.World;
 
 import com.orbischallenge.game.engine.Point;
@@ -29,6 +28,7 @@ public class NestLocationFinder {
     public List<Point> findNestLocations(World world, Point start, int numNests) {
 
         ArrayList nests = new ArrayList<Point>();
+<<<<<<< HEAD
         HashSet<Point> visited = new HashSet<>();
 
 
@@ -38,10 +38,17 @@ public class NestLocationFinder {
                 Point a = p.add(d).getMod(world.getWidth(), world.getHeight());
                 visited.add(a);
             }
+=======
+        ArrayList visited = new ArrayList<Point>();
+        if (PlayerAI.AVOID_AT_ALL_COSTS != null) {
+            nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+            visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+>>>>>>> parent of 15408c8... changes
         }
 
         int initLen = nests.size();
         int counter = 0;
+<<<<<<< HEAD
 
         while (nests.size() < initLen + numNests && counter < 20) {
             System.out.println();
@@ -57,6 +64,10 @@ public class NestLocationFinder {
                 return nests;
             }
             Point newPoint = t.getPosition();
+=======
+        while (nests.size() < initLen + numNests && counter < 10){
+            Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
+>>>>>>> parent of 15408c8... changes
             visited.add(newPoint);
             nests.add(newPoint);
             int pathSum = 0;
@@ -65,10 +76,7 @@ public class NestLocationFinder {
                 Point a = newPoint.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                 if (!world.isWall(a) && !world.getTileAt(a).isFriendly()) {
                     List l = world.getShortestPath(start, a, nests);
-                    if (l == null) {
-                        fail = true;
-                        break;
-                    }
+                    if (l == null) fail = true;
                     pathSum += l.size();
                 }
             }

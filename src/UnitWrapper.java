@@ -34,7 +34,6 @@ public class UnitWrapper {
     public void deleteMission() {
         Mission m = this.mission;
         this.mission = null;
-        if(m!=null)
         m.onDelete();
     }
 

@@ -6,13 +6,16 @@ import com.orbischallenge.game.engine.Point;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+<<<<<<< HEAD
 import java.util.*;
+=======
+>>>>>>> parent of 15408c8... changes
 
 public class PlayerAI {
     // Any field declarations go here
 
     public static World world;
-    public static ArrayList<UnitWrapper> friendlyUnits = new ArrayList<>();
+    public static ArrayList<UnitWrapper> friendlyUnits;
     public static Collection<Point> AVOID_AT_ALL_COSTS = new ArrayList<>();
 
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
@@ -54,15 +57,14 @@ public class PlayerAI {
             PlayerAI.friendlyUnits.add(w);
         }
 
-        Object[] temp = unitIDToWrapper.keySet().toArray();
 
-        for (Object i : temp) {
-
+        for (String i : unitIDToWrapper.keySet()) {
             if (!PlayerAI.friendlyUnits.contains(unitIDToWrapper.get(i))) {
                 unitIDToWrapper.get(i).deleteMission();
                 unitIDToWrapper.remove(i);
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
@@ -86,19 +88,28 @@ public class PlayerAI {
             nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
 >>>>>>> parent of 8faffbb... debugging
             AVOID_AT_ALL_COSTS.addAll(nests);
+=======
+        if (turns == 0) {
+            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
+>>>>>>> parent of 15408c8... changes
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
-
+                break;
             }
+<<<<<<< HEAD
             //System.out.println(MissionManager.getInstance().pendingMissions.size());
             System.out.println("NESTS:");
             //for (Point m: nests) System.out.println(m);
             for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
             System.out.println();
+=======
+            System.out.println(MissionManager.getInstance().pendingMissions.size());
+            System.out.println(MissionManager.getInstance().pendingMissions.peek().getDestination());
+>>>>>>> parent of 15408c8... changes
         }
 
-
         MissionManager.getInstance().distributeMissions();
+<<<<<<< HEAD
         for (Mission m : MissionManager.getInstance().saveForLater) {
             System.out.println(MissionManager.getInstance().pendingMissions.size());
             System.out.println(MissionManager.getInstance().saveForLater.size());
@@ -107,10 +118,14 @@ public class PlayerAI {
             //   System.out.println(m.getDestination());
             //}
             //System.out.println();
+=======
+        System.out.println(MissionManager.getInstance().pendingMissions.size());
+        System.out.println(MissionManager.getInstance().saveForLater.size());
+>>>>>>> parent of 15408c8... changes
 
             System.out.println(PlayerAI.friendlyUnits.size());
 
-/*
+
         for (FriendlyUnit u : friendlyUnits) {
             if (u.getLastMoveResult() == MoveResult.MOVE_SUCCESS) {
                 System.out.println("OVER HERE:");
@@ -119,8 +134,8 @@ public class PlayerAI {
                 System.out.println();
             }
         }
-*/
 
+<<<<<<< HEAD
             for (UnitWrapper i : PlayerAI.friendlyUnits) {
             /*if (i.getMission() == null){
                 System.out.println("INACTIVE");
@@ -134,6 +149,27 @@ public class PlayerAI {
             }*/
                 i.update();
             }
+=======
+        for (UnitWrapper i : PlayerAI.friendlyUnits) {
+            i.update();
+        }
+
+
+
+
+        /* Fly away to freedom, daring fireflies
+        Build thou nests
+        Grow, become stronger
+        Take over the world */
+        /*
+        for (FriendlyUnit unit: friendlyUnits) {
+            List<Point> path = world.getShortestPath(unit.getPosition(),
+                                                     world.getClosestCapturableTileFrom(unit.getPosition(), null).getPosition(),
+                                                     null);
+            if (path != null) world.move(unit, path.get(0));
+        }*/
+        turns += 1;
+>>>>>>> parent of 15408c8... changes
 
             turns += 1;
 

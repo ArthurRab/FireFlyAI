@@ -2,8 +2,6 @@
 import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
-import java.util.List;
-
 public class FillLocationMission extends GoToLocationMission {
 
     public FillLocationMission(Tile d, float p) {
@@ -13,6 +11,10 @@ public class FillLocationMission extends GoToLocationMission {
     @Override
     public Point getMovePosition() {
         if (getDestination().isFriendly()) {
+<<<<<<< HEAD
+=======
+            System.out.println(getDestination().getPosition());
+>>>>>>> parent of 15408c8... changes
             setCompleted(true);
             //FIX INEFFICIENCY HERE LATER - HE WAITS A TURN BEFORE MOVING - ADD A WAY TO REQUEST A MISSION
             return getWorker().getPosition();
@@ -24,6 +26,7 @@ public class FillLocationMission extends GoToLocationMission {
 
     public int compare(UnitWrapper o1, UnitWrapper o2) {
         if (o1.comparisonValues.isEmpty()) {
+<<<<<<< HEAD
             List<Point> path = PlayerAI.world.getShortestPath(o1.getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
             if (path != null)
                 o1.comparisonValues.add((float) -path.size());
@@ -40,6 +43,18 @@ public class FillLocationMission extends GoToLocationMission {
                 o2.comparisonValues.add(-1000f);
 
             o2.comparisonValues.add((float) -o2.getHealth());
+=======
+            o1.comparisonValues.add
+                    ((float) PlayerAI.world.getShortestPath(o1.getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS).size());
+            o1.comparisonValues.add
+                    ((float) -o1.getHealth());
+        }
+        if (o2.comparisonValues.isEmpty()) {
+            o2.comparisonValues.add
+                    ((float) PlayerAI.world.getShortestPath(o2.getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS).size());
+            o2.comparisonValues.add
+                    ((float) -o2.getHealth());
+>>>>>>> parent of 15408c8... changes
         }
 
         for (int i = 0; i < o1.comparisonValues.size(); i++) {
