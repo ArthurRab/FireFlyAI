@@ -46,10 +46,7 @@ public abstract class Mission implements Comparator<UnitWrapper> {
         UnitWrapper best = Collections.max(u, this);
 
         for (UnitWrapper unit : u) {
-<<<<<<< HEAD
-=======
             if (unit == null) System.out.println("GI");
->>>>>>> parent of 15408c8... changes
             unit.comparisonValues.clear();
         }
 

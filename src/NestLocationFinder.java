@@ -1,3 +1,4 @@
+import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.firefly.client.objects.models.World;
 
 import com.orbischallenge.game.engine.Point;
@@ -8,9 +9,6 @@ import java.util.*;
 public class NestLocationFinder {
     HashSet<Point> allDirections;
 
-<<<<<<< HEAD
-    public ArrayList<Point> findNestLocations(World world, Point start, int numNests) {
-=======
     public NestLocationFinder(){
         allDirections = new HashSet<>();
         Point zero = new Point(0,0);
@@ -28,36 +26,21 @@ public class NestLocationFinder {
     }
 
     public List<Point> findNestLocations(World world, Point start, int numNests){
->>>>>>> origin/master
 
         ArrayList nests = new ArrayList<Point>();
-<<<<<<< HEAD
         HashSet<Point> visited = new HashSet<>();
 
 
-        for (Point p: PlayerAI.AVOID_AT_ALL_COSTS){
+        for (Point p: PlayerAI.AVOID_AT_ALL_COSTS) {
             nests.add(p);
-            for (Point d : allDirections){
+            for (Point d : allDirections) {
                 Point a = p.add(d).getMod(world.getWidth(), world.getHeight());
                 visited.add(a);
             }
-=======
-        ArrayList visited = new ArrayList<Point>();
-        if (PlayerAI.AVOID_AT_ALL_COSTS != null) {
-            nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
-            visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
->>>>>>> parent of 15408c8... changes
         }
 
         int initLen = nests.size();
         int counter = 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        while (nests.size() < initLen + numNests && counter < 10) {
-=======
->>>>>>> origin/master
->>>>>>> parent of 99f6931... TURTLE
 
         while (nests.size() < initLen + numNests && counter < 20){
             System.out.println();
@@ -68,19 +51,13 @@ public class NestLocationFinder {
             System.out.println(counter);
             System.out.println();
             Tile t = world.getClosestNeutralTileFrom(start, visited);
-<<<<<<< HEAD
-            if (t == null) {
-=======
+
             if (t == null){
 
->>>>>>> origin/master
                 return nests;
             }
+
             Point newPoint = t.getPosition();
-=======
-        while (nests.size() < initLen + numNests && counter < 10){
-            Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
->>>>>>> parent of 15408c8... changes
             visited.add(newPoint);
             nests.add(newPoint);
             int pathSum = 0;
@@ -106,11 +83,8 @@ public class NestLocationFinder {
         return nests.subList(initLen, nests.size());
     }
 
-<<<<<<< HEAD
-    public HashSet<Point> getNeighbours(World world, ArrayList<Point> nests) {
-=======
+
     public HashSet<Point> getNeighbours(World world, List<Point> nests){
->>>>>>> origin/master
         HashSet<Point> neighbours = new HashSet();
         for (Point n : nests) {
             for (Direction d : Direction.getOrderedDirections()) {
@@ -121,11 +95,9 @@ public class NestLocationFinder {
         return neighbours;
     }
 
-<<<<<<< HEAD
-    public List<List<Point>> createPaths(World world, Point start, ArrayList<Point> nests) {
-=======
+
     public List<List<Point>> createPaths(World world, Point start, List<Point> nests){
->>>>>>> origin/master
+
         HashSet<Point> neighbours = getNeighbours(world, nests);
         ArrayList<List<Point>> paths = new ArrayList();
         HashSet<List<Point>> removedPaths = new HashSet();

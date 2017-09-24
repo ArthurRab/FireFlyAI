@@ -28,14 +28,9 @@ public class MissionManager {
         pendingMissions = saveForLater;
         saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
     }
-<<<<<<< HEAD
 
     public PriorityQueue<Mission> pendingMissions = new PriorityQueue<>(1, new MissionPriorityComparator());
     public PriorityQueue<Mission> saveForLater = new PriorityQueue<>(1, new MissionPriorityComparator());
-=======
-    public PriorityQueue<Mission> pendingMissions = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
-    public PriorityQueue<Mission> saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
->>>>>>> parent of 15408c8... changes
 
     public void addMission(Mission m) {
         pendingMissions.add(m);
@@ -53,13 +48,10 @@ public class MissionManager {
 
             if (applicants.isEmpty()) {
                 saveForLater.add(m);
-<<<<<<< HEAD
+
                 saveForLater.addAll(pendingMissions);
                 pendingMissions.clear();
             } else {
-=======
-            }else {
->>>>>>> parent of 15408c8... changes
 
                 UnitWrapper chosenOne = m.chooseUnit(applicants);
 
