@@ -28,7 +28,7 @@ public class NestLocationFinder {
             int pathSum = 0;
             boolean fail = false;
             for (Direction d: Direction.getOrderedDirections()){
-                Point a = newPoint.add(d.getDirectionDelta());
+                Point a = newPoint.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                 if (!world.isWall(a) && !world.getTileAt(a).isFriendly()){
                     List l = world.getShortestPath(start, a, nests);
                     if (l == null) fail = true;
@@ -38,7 +38,7 @@ public class NestLocationFinder {
             if (fail || pathSum > 15) nests.remove(newPoint);
             else {
                 for (Direction d : Direction.getOrderedDirections()) {
-                    Point a = newPoint.add(d.getDirectionDelta());
+                    Point a = newPoint.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                     visited.add(a);
                 }
                 counter += 1;
@@ -54,7 +54,7 @@ public class NestLocationFinder {
         HashSet<List<Point>> removedPaths = new HashSet();
         for (Point n: nests){
             for (Direction d: Direction.getOrderedDirections()) {
-                Point a = n.add(d.getDirectionDelta());
+                Point a = n.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                 neighbourhoods.add(a);
             }
         }
