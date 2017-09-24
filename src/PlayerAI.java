@@ -1,13 +1,11 @@
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
-import com.orbischallenge.firefly.objects.enums.MoveResult;
 import com.orbischallenge.game.engine.Point;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 
 public class PlayerAI {
     // Any field declarations go here
@@ -23,9 +21,9 @@ public class PlayerAI {
 
     FriendlyUnit pilot = null;
 
-    public PlayerAI() {
-        // Any instantiation code goes here
+    public MissionCreator mc;
 
+    public PlayerAI() {
 
     }
 
@@ -65,7 +63,7 @@ public class PlayerAI {
             }
         }
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
-        if (turns <= 0){
+        if (turns <= 0) {
             AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
             nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 8);
             AVOID_AT_ALL_COSTS.addAll(nests);
@@ -73,64 +71,14 @@ public class PlayerAI {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
 
             }
-            System.out.println(MissionManager.getInstance().pendingMissions.size());
-            //for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
-            System.out.println();
         }
 
 
         MissionManager.getInstance().distributeMissions();
-        System.out.println(MissionManager.getInstance().pendingMissions.size());
-        System.out.println(MissionManager.getInstance().saveForLater.size());
-        System.out.println("==DESTS==");
-        for (Mission m: MissionManager.getInstance().saveForLater){
-            System.out.println(m.getDestination());
-        }
-        System.out.println();
-
-        System.out.println(PlayerAI.friendlyUnits.size());
-
-/*
-        for (FriendlyUnit u : friendlyUnits) {
-            if (u.getLastMoveResult() == MoveResult.MOVE_SUCCESS) {
-                System.out.println("OVER HERE:");
-                System.out.println(u.getUuid());
-                System.out.println(u.getPosition());
-                System.out.println();
-            }
-        }
-*/
-
-        for (UnitWrapper i : PlayerAI.friendlyUnits) {
-            if (i.getMission() == null){
-                System.out.println("INACTIVE");
-                System.out.println(i.getPosition());
-                System.out.println();
-            }
-            else{
-                System.out.println("ACTIVE");
-                System.out.println(((GoToLocationMission) i.getMission()).getPath());
-                System.out.println();
-            }
-            i.update();
+        for (Mission m : MissionManager.getInstance().saveForLater) {
         }
 
-
-
-
-        /* Fly away to freedom, daring fireflies
-        Build thou nests
-        Grow, become stronger
-        Take over the world */
-        /*
-        for (FriendlyUnit unit: friendlyUnits) {
-            List<Point> path = world.getShortestPath(unit.getPosition(),
-                                                     world.getClosestCapturableTileFrom(unit.getPosition(), null).getPosition(),
-                                                     null);
-            if (path != null) world.move(unit, path.get(0));
-        }*/
         turns += 1;
-
 
     }
 }

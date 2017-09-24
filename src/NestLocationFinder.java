@@ -8,7 +8,7 @@ import java.util.*;
 
 public class NestLocationFinder {
 
-    public ArrayList<Point> findNestLocations(World world, Point start, int numNests){
+    public ArrayList<Point> findNestLocations(World world, Point start, int numNests) {
 
         ArrayList nests = new ArrayList<Point>();
         HashSet<Point> visited = new HashSet<>();
@@ -18,13 +18,10 @@ public class NestLocationFinder {
         }
         int initLen = nests.size();
         int counter = 0;
-        while (nests.size() < initLen + numNests && counter < 10){
+        while (nests.size() < initLen + numNests && counter < 10) {
 
             Tile t = world.getClosestNeutralTileFrom(start, visited);
-            if (t == null){
-                System.out.println(start);
-                System.out.print("VISTIED: ");
-                System.out.println(visited.size());
+            if (t == null) {
                 return nests;
             }
             Point newPoint = t.getPosition();
@@ -32,9 +29,9 @@ public class NestLocationFinder {
             nests.add(newPoint);
             int pathSum = 0;
             boolean fail = false;
-            for (Direction d: Direction.getOrderedDirections()){
+            for (Direction d : Direction.getOrderedDirections()) {
                 Point a = newPoint.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
-                if (!world.isWall(a) && !world.getTileAt(a).isFriendly()){
+                if (!world.isWall(a) && !world.getTileAt(a).isFriendly()) {
                     List l = world.getShortestPath(start, a, nests);
                     if (l == null) {
                         fail = true;
@@ -56,10 +53,10 @@ public class NestLocationFinder {
         return nests;
     }
 
-    public HashSet<Point> getNeighbours(World world, ArrayList<Point> nests){
+    public HashSet<Point> getNeighbours(World world, ArrayList<Point> nests) {
         HashSet<Point> neighbours = new HashSet();
-        for (Point n: nests){
-            for (Direction d: Direction.getOrderedDirections()) {
+        for (Point n : nests) {
+            for (Direction d : Direction.getOrderedDirections()) {
                 Point a = n.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                 if (!world.isWall(a) && !world.getTileAt(a).isFriendly()) neighbours.add(a);
             }
@@ -67,21 +64,20 @@ public class NestLocationFinder {
         return neighbours;
     }
 
-    public List<List<Point>> createPaths(World world, Point start, ArrayList<Point> nests){
+    public List<List<Point>> createPaths(World world, Point start, ArrayList<Point> nests) {
         HashSet<Point> neighbours = getNeighbours(world, nests);
         ArrayList<List<Point>> paths = new ArrayList();
         HashSet<List<Point>> removedPaths = new HashSet();
 
-        for (Point n: neighbours){
+        for (Point n : neighbours) {
             paths.add(world.getShortestPath(start, n, nests));
         }
-        for (int i = 0; i < paths.size(); i++){
-            for (int j = i+1; j < paths.size(); i++){
+        for (int i = 0; i < paths.size(); i++) {
+            for (int j = i + 1; j < paths.size(); i++) {
                 List<Point> pathI = paths.get(i), pathJ = paths.get(j);
-                if (pathI.containsAll(pathJ)){
+                if (pathI.containsAll(pathJ)) {
                     removedPaths.add(pathJ);
-                }
-                else if(pathJ.containsAll(pathI)){
+                } else if (pathJ.containsAll(pathI)) {
                     removedPaths.add(pathI);
                 }
             }

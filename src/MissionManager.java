@@ -12,14 +12,23 @@ public class MissionManager {
         return mm;
     }
 
-    private MissionManager(){
+    private MissionManager() {
 
+    }
+
+    public void clearAllMissions() {
+        for (UnitWrapper u : PlayerAI.friendlyUnits) {
+            u.deleteMission();
+        }
+        pendingMissions.clear();
+        saveForLater.clear();
     }
 
     public void update() {
         pendingMissions = saveForLater;
         saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
     }
+
     public PriorityQueue<Mission> pendingMissions = new PriorityQueue<>(1, new MissionPriorityComparator());
     public PriorityQueue<Mission> saveForLater = new PriorityQueue<>(1, new MissionPriorityComparator());
 
@@ -41,7 +50,7 @@ public class MissionManager {
                 saveForLater.add(m);
                 saveForLater.addAll(pendingMissions);
                 pendingMissions.clear();
-            }else {
+            } else {
 
                 UnitWrapper chosenOne = m.chooseUnit(applicants);
 

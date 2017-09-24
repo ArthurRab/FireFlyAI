@@ -38,7 +38,7 @@ public class UnitWrapper {
         m.onDelete();
     }
 
-    private FriendlyUnit getUnit() {
+    public FriendlyUnit getUnit() {
         return PlayerAI.world.getUnit(unitID);
     }
 

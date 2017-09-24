@@ -13,7 +13,6 @@ public class FillLocationMission extends GoToLocationMission {
     @Override
     public Point getMovePosition() {
         if (getDestination().isFriendly()) {
-            System.out.println("PREMATURE FINISH!");
             setCompleted(true);
             //FIX INEFFICIENCY HERE LATER - HE WAITS A TURN BEFORE MOVING - ADD A WAY TO REQUEST A MISSION
             return getWorker().getPosition();
@@ -31,7 +30,7 @@ public class FillLocationMission extends GoToLocationMission {
             else
                 o1.comparisonValues.add(-1000f);
 
-            o1.comparisonValues.add((float) o1.getHealth());
+            o1.comparisonValues.add((float) -o1.getHealth());
         }
         if (o2.comparisonValues.isEmpty()) {
             List<Point> path = PlayerAI.world.getShortestPath(o2.getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
@@ -40,7 +39,7 @@ public class FillLocationMission extends GoToLocationMission {
             else
                 o2.comparisonValues.add(-1000f);
 
-            o2.comparisonValues.add((float) o2.getHealth());
+            o2.comparisonValues.add((float) -o2.getHealth());
         }
 
         for (int i = 0; i < o1.comparisonValues.size(); i++) {

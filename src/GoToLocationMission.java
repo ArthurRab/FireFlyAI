@@ -31,17 +31,7 @@ public class GoToLocationMission extends Mission {
                 path.add(0, getWorker().getPosition());
                 index = 0;
             }
-        /*
-        System.out.println();
-        System.out.println(getWorker().getUnit().getUuid());
-        System.out.println(getWorker().getPosition());
-        System.out.println(path);
-        System.out.println(index);
 
-        System.out.println(path);
-        System.out.println(path.get(1));
-        System.out.println();
-        */
             path = path.subList(index, path.size());
             if (path.size() == 1) {
                 setCompleted(true);
