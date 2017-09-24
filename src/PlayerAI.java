@@ -1,6 +1,7 @@
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
+import com.orbischallenge.firefly.objects.enums.MoveResult;
 import com.orbischallenge.game.engine.Point;
 import org.monte.media.Player;
 
@@ -19,6 +20,8 @@ public class PlayerAI {
 
     NestLocationFinder nlf = new NestLocationFinder();
     ArrayList<Point> nests;
+
+    FriendlyUnit pilot = null;
 
     public PlayerAI() {
         // Any instantiation code goes here
@@ -48,6 +51,9 @@ public class PlayerAI {
                 w = new UnitWrapper(f);
                 unitIDToWrapper.put(f.getUuid(), w);
             }
+            else{
+                w.setUnit(f);
+            }
 
             fUnits[i] = w;
         }
@@ -57,7 +63,10 @@ public class PlayerAI {
             nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 4);
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
+                break;
             }
+            System.out.println(MissionManager.getInstance().pendingMissions.size());
+            System.out.println(MissionManager.getInstance().pendingMissions.peek().getDestination());
         }
 
         MissionManager.getInstance().distributeMissions();
@@ -65,7 +74,19 @@ public class PlayerAI {
         System.out.println(MissionManager.getInstance().saveForLater.size());
 
         System.out.println(PlayerAI.friendlyUnits.length);
+
+
+        for (FriendlyUnit u: friendlyUnits){
+            if (u.getLastMoveResult() == MoveResult.MOVE_SUCCESS){
+                System.out.println("OVER HERE:");
+                System.out.println(u.getUuid());
+                System.out.println(u.getPosition());
+                System.out.println();
+            }
+        }
+
         for (UnitWrapper i:PlayerAI.friendlyUnits) {
+
             i.update();
         }
 

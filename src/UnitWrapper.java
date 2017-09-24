@@ -27,6 +27,7 @@ public class UnitWrapper {
         mission.setWorker(this);
     }
 
+
     public boolean willTakeMission(Mission m) {
         return mission == null || m.getPriority() > mission.getPriority();
     }
@@ -38,7 +39,7 @@ public class UnitWrapper {
     }
 
 
-    public Unit getUnit() {
+    public FriendlyUnit getUnit() {
         return unit;
     }
 
