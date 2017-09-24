@@ -77,15 +77,16 @@ public class PlayerAI {
                         - Math.max(Math.abs(diff2.getX()), Math.abs(diff2.getY()));
             });
             nests = nests.subList(0, 8);
+
             AVOID_AT_ALL_COSTS.addAll(nests);
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
 
             }
             //System.out.println(MissionManager.getInstance().pendingMissions.size());
-            //System.out.println("NESTS:");
+            System.out.println("NESTS:");
             //for (Point m: nests) System.out.println(m);
-            //for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
+            for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
             System.out.println();
         }
 

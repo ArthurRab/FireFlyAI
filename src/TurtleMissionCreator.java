@@ -15,7 +15,7 @@ public class TurtleMissionCreator implements MissionCreator {
             if (temp.getY() > maxY) maxY = temp.getY();
         }
         topLeft = start.add(new Point(minX, minY)).getMod(PlayerAI.world.getWidth(), PlayerAI.world.getHeight());
-        bottomRight = start.add(new Point(maxX, , maxY)).getMod(PlayerAI.world.getWidth(), PlayerAI.world.getHeight());
+        bottomRight = start.add(new Point(maxX, maxY)).getMod(PlayerAI.world.getWidth(), PlayerAI.world.getHeight());
 
         mx = (topLeft.getX() + bottomRight.getX()) / 2f;
         my = (topLeft.getY() + bottomRight.getY()) / 2f;
@@ -23,7 +23,7 @@ public class TurtleMissionCreator implements MissionCreator {
 
         for (int i = topLeft.getX(); i <= bottomRight.getX(); i++) {
             for (int j = topLeft.getY(); j <= bottomRight.getY(); j++) {
-                float temp = ((i - mx) * (i - mx) + (j - my) * j - my))
+                float temp = ((i - mx) * (i - mx) + (j - my) * (j - my));
                 MissionManager.getInstance().addMission(new HoldPositionQuicklyMission((int) temp, PlayerAI.world.getTileAt(new Point(i, j)), (float) (100 / temp)));
             }
         }
