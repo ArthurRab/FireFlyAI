@@ -39,4 +39,33 @@ public class NestLocationFinder {
         return nests;
     }
 
+    public List<List<Point>> createPaths(World world, Point start, ArrayList<Point> nests){
+        HashSet<Point> neighbourhoods = new HashSet();
+        ArrayList<List<Point>> paths = new ArrayList();
+        HashSet<List<Point>> removedPaths = new HashSet();
+        for (Point n: nests){
+            for (Direction d: Direction.getOrderedDirections()) {
+                Point a = n.add(d.getDirectionDelta());
+                neighbourhoods.add(a);
+            }
+        }
+        for (Point n: neighbourhoods){
+            paths.add(world.getShortestPath(start, n, nests));
+        }
+        for (int i = 0; i < paths.size(); i++){
+            for (int j = i+1; j < paths.size(); i++){
+                List<Point> pathI = paths.get(i), pathJ = paths.get(j);
+                if (pathI.containsAll(pathJ)){
+                    removedPaths.add(pathJ);
+                }
+                else if(pathJ.containsAll(pathI)){
+                    removedPaths.add(pathI);
+                }
+            }
+        }
+        paths.removeAll(removedPaths);
+
+        return paths;
+    }
+
 }
