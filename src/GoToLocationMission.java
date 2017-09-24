@@ -15,21 +15,24 @@ public class GoToLocationMission extends Mission {
 
     public void onStart() {
         path = PlayerAI.world.getShortestPath(getWorker().getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
-        path.add(0, getWorker().getPosition());
+        if(path!=null)
+            path.add(0, getWorker().getPosition());
+        else
+         setCompleted(true);
     }
 
     @Override
     public Point getMovePosition() {
-        Point playerPos = getWorker().getPosition();
-        int index;
-        if (path.contains(playerPos)) {
-            index = path.indexOf(playerPos);
-        }
-        else{
-            PlayerAI.world.getShortestPath(getWorker().getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
-            path.add(0, getWorker().getPosition());
-            index = 0;
-        }
+        if(!isCompleted()) {
+            Point playerPos = getWorker().getPosition();
+            int index;
+            if (path.contains(playerPos)) {
+                index = path.indexOf(playerPos);
+            } else {
+                PlayerAI.world.getShortestPath(getWorker().getPosition(), getDestination().getPosition(), PlayerAI.AVOID_AT_ALL_COSTS);
+                path.add(0, getWorker().getPosition());
+                index = 0;
+            }
         /*
         System.out.println();
         System.out.println(getWorker().getUnit().getUuid());
@@ -41,13 +44,15 @@ public class GoToLocationMission extends Mission {
         System.out.println(path.get(1));
         System.out.println();
         */
-        path = path.subList(index, path.size());
-        if (path.size() == 1) {
-            setCompleted(true);
-            return playerPos;
-        }
+            path = path.subList(index, path.size());
+            if (path.size() == 1) {
+                setCompleted(true);
+                return playerPos;
+            }
 
-        return path.get(1);
+            return path.get(1);
+        }
+        return getWorker().getPosition();
 
     }
 
