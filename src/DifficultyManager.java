@@ -1,4 +1,4 @@
-package General;
+
 
 import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.firefly.client.objects.models.Tile;

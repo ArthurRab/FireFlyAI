@@ -1,13 +1,7 @@
-package General;
-import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
-import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
-import com.orbischallenge.firefly.client.objects.models.Tile;
 
 import com.orbischallenge.game.engine.Point;
 import com.orbischallenge.firefly.objects.enums.Direction;
-
-import com.orbischallenge.logging.Log;
 
 import java.util.*;
 
@@ -17,8 +11,10 @@ public class NestLocationFinder {
 
         ArrayList nests = new ArrayList<Point>();
         ArrayList visited = new ArrayList<Point>();
-        nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
-        visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+        if (PlayerAI.AVOID_AT_ALL_COSTS != null) {
+            nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+            visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+        }
         int initLen = nests.size();
         int counter = 0;
         while (nests.size() < initLen + numNests && counter < 10){
@@ -53,7 +49,7 @@ public class NestLocationFinder {
         for (Point n: nests){
             for (Direction d: Direction.getOrderedDirections()) {
                 Point a = n.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
-                neighbours.add(a);
+                if (!world.isWall(a) && !world.getTileAt(a).isFriendly()) neighbours.add(a);
             }
         }
         return neighbours;

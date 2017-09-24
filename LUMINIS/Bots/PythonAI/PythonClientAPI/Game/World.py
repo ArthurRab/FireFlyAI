@@ -14,7 +14,7 @@ class World:
         If there are no living units with uuid, returns None.
 
         If you want to keep track of your units across turns,
-        save their uuids somewhere in your General.PlayerAI instance
+        save their uuids somewhere in your PlayerAI instance
         and use this method to retrieve them at each turn.
 
         :param str uuid: unique uuid of desired unit

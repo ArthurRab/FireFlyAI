@@ -1,5 +1,3 @@
-package MissionTypes;
-
 import java.util.Comparator;
 
 public class MissionPriorityComparator implements Comparator<Mission> {

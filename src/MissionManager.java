@@ -1,8 +1,3 @@
-package MissionTypes;
-
-import General.PlayerAI;
-import General.UnitWrapper;
-
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
@@ -17,17 +12,16 @@ public class MissionManager {
         return mm;
     }
 
-    private MissionManager() {
+    private MissionManager(){
 
     }
 
     public void update() {
         pendingMissions = saveForLater;
-        saveForLater = new PriorityQueue<Mission>(0, new MissionPriorityComparator());
+        saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
     }
-
-    public PriorityQueue<Mission> pendingMissions = new PriorityQueue<Mission>(0, new MissionPriorityComparator());
-    public PriorityQueue<Mission> saveForLater = new PriorityQueue<Mission>(0, new MissionPriorityComparator());
+    public PriorityQueue<Mission> pendingMissions = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
+    public PriorityQueue<Mission> saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
 
     public void addMission(Mission m) {
         pendingMissions.add(m);
@@ -45,12 +39,13 @@ public class MissionManager {
 
             if (applicants.isEmpty()) {
                 saveForLater.add(m);
+            }else {
+
+                UnitWrapper chosenOne = m.chooseUnit(applicants);
+
+                chosenOne.setMission(m);
+                m.onStart();
             }
-
-            UnitWrapper chosenOne = m.chooseUnit(applicants);
-
-            chosenOne.setMission(m);
-            m.onStart();
         }
     }
 

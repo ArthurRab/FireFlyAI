@@ -1,11 +1,8 @@
-package General;
-
-import MissionTypes.FillLocationMission;
-import MissionTypes.MissionManager;
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.game.engine.Point;
+import org.monte.media.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +13,7 @@ public class PlayerAI {
 
     public static World world;
     public static UnitWrapper[] friendlyUnits;
-    public static Collection<Point> AVOID_AT_ALL_COSTS;
+    public static Collection<Point> AVOID_AT_ALL_COSTS = new ArrayList<>();
 
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
 
@@ -44,12 +41,15 @@ public class PlayerAI {
         PlayerAI.world = world;
         MissionManager.getInstance().update();
         UnitWrapper[] fUnits = new UnitWrapper[friendlyUnits.length];
-        for (FriendlyUnit f : friendlyUnits) {
+        for (int i=0; i<friendlyUnits.length;i++) {
+            FriendlyUnit f = friendlyUnits[i];
             UnitWrapper w = unitIDToWrapper.getOrDefault(f.getUuid(), null);
             if (w == null) {
                 w = new UnitWrapper(f);
                 unitIDToWrapper.put(f.getUuid(), w);
             }
+
+            fUnits[i] = w;
         }
 
         PlayerAI.friendlyUnits = fUnits;
@@ -58,6 +58,15 @@ public class PlayerAI {
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
             }
+        }
+
+        MissionManager.getInstance().distributeMissions();
+        System.out.println(MissionManager.getInstance().pendingMissions.size());
+        System.out.println(MissionManager.getInstance().saveForLater.size());
+
+        System.out.println(PlayerAI.friendlyUnits.length);
+        for (UnitWrapper i:PlayerAI.friendlyUnits) {
+            i.update();
         }
 
 

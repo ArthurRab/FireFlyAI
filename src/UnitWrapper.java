@@ -1,6 +1,4 @@
-package General;
-
-import MissionTypes.Mission;
+import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.Unit;
 import com.orbischallenge.game.engine.Point;
 
@@ -8,14 +6,15 @@ import java.util.ArrayList;
 
 public class UnitWrapper {
     private Mission mission;
-    private Unit unit;
+    private FriendlyUnit unit;
     public ArrayList<Float> comparisonValues;
 
     public UnitWrapper() {
         comparisonValues = new ArrayList<>();
     }
 
-    public UnitWrapper(Unit unit) {
+    public UnitWrapper(FriendlyUnit unit) {
+        this();
         setUnit(unit);
     }
 
@@ -29,7 +28,7 @@ public class UnitWrapper {
     }
 
     public boolean willTakeMission(Mission m) {
-        return m == null || m.getPriority() >= mission.getPriority();
+        return mission == null || m.getPriority() > mission.getPriority();
     }
 
     public void deleteMission() {
@@ -43,7 +42,7 @@ public class UnitWrapper {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
+    public void setUnit(FriendlyUnit unit) {
         this.unit = unit;
     }
 
@@ -52,6 +51,18 @@ public class UnitWrapper {
     }
 
     public Point getPosition() {
-        return getPosition();
+        return unit.getPosition();
+    }
+
+    public void update(){
+        if(mission!=null){
+            PlayerAI.world.move(unit, mission.getMovePosition());
+        }else{
+            PlayerAI.world.move(unit, unit.getPosition());
+        }
+
+        if(mission!=null && mission.isCompleted()){
+            deleteMission();
+        }
     }
 }

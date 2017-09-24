@@ -1,7 +1,4 @@
-package MissionTypes;
 
-import General.PlayerAI;
-import General.UnitWrapper;
 import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
@@ -12,14 +9,15 @@ public class FillLocationMission extends GoToLocationMission {
     }
 
     @Override
-    public Point getMoveDirection() {
+    public Point getMovePosition() {
         if (getDestination().isFriendly()) {
+            System.out.println(getDestination().getPosition());
             setCompleted(true);
-            //FIX INEFICIENY HERE LATER - HE WAITS A TURN BEFORE MOVING - ADD A WAY TO REQUEST A MISSION
+            //FIX INEFFICIENCY HERE LATER - HE WAITS A TURN BEFORE MOVING - ADD A WAY TO REQUEST A MISSION
             return getWorker().getPosition();
         }
 
-        return super.getMoveDirection();
+        return super.getMovePosition();
 
     }
 

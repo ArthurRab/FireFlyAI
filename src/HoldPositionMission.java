@@ -1,6 +1,3 @@
-package MissionTypes;
-
-import General.UnitWrapper;
 import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
@@ -11,13 +8,8 @@ public class HoldPositionMission extends GoToLocationMission {
     }
 
     @Override
-    public void onLocationReached() {
-
-    }
-
-    @Override
-    public Point getMoveDirection() {
-        return super.getMoveDirection();
+    public Point getMovePosition() {
+        return super.getMovePosition();
     }
 
     @Override

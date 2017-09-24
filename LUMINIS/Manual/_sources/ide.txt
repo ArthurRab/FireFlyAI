@@ -54,7 +54,7 @@ Now you can start running games to debug and test your AI.
     .. image:: images/IntelliJ3.png
         :align: center
 	
-#. Select 'General.PlayerAI as Red' (Or 'as Blue'). In subsequent runs you can click the little Debug icon in your toolbar.
+#. Select 'PlayerAI as Red' (Or 'as Blue'). In subsequent runs you can click the little Debug icon in your toolbar.
 
     .. image:: images/IntelliJ4.png
         :align: center
@@ -178,7 +178,7 @@ First, start the Launcher. You can start it once, and leave it open between game
 .. image:: images/PyCharm3.png
 	:align: center
 
-5. Select 'General.PlayerAI as Red' (Or 'as Blue' if you selected the Blue team to Start with IDE in the launcher). In subsequent runs you can click the little Debug icon in your toolbar.
+5. Select 'PlayerAI as Red' (Or 'as Blue' if you selected the Blue team to Start with IDE in the launcher). In subsequent runs you can click the little Debug icon in your toolbar.
 
 .. image:: images/PyCharm4.png
 	:align: center
@@ -198,11 +198,11 @@ Other IDEs
     -c _lastconfig -u <team> 
 	
    Where <team> is Red or Blue (depending on which team you select as "Start with IDE" in the launcher)
-3. For Java: Make sure your General.PlayerAI file is included in the classpath
+3. For Java: Make sure your PlayerAI file is included in the classpath
    
    For Python: in addition to the above command parameters, you must also pass a third one::
    
-    -cp <path to folder where General.PlayerAI.py is located>
+    -cp <path to folder where PlayerAI.py is located>
 	
    Be weary of spaces in the folder path.
 4. (Important!) Make sure your "Working Directory" is set to the folder Launcher.jar is located in (this should be the LUMINIS folder in your starter pack).

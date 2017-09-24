@@ -1,6 +1,4 @@
-package MissionTypes;
 
-import General.UnitWrapper;
 import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
@@ -36,9 +34,7 @@ public abstract class Mission implements Comparator<UnitWrapper> {
     }
 
 
-    public abstract void onLocationReached();
-
-    public abstract Point getMoveDirection();
+    public abstract Point getMovePosition();
 
 
     public UnitWrapper chooseUnit(List<UnitWrapper> u) {
@@ -50,6 +46,7 @@ public abstract class Mission implements Comparator<UnitWrapper> {
         UnitWrapper best = Collections.max(u, this);
 
         for (UnitWrapper unit : u) {
+            if (unit == null) System.out.println("GI");
             unit.comparisonValues.clear();
         }
 

@@ -1,7 +1,5 @@
-package MissionTypes;
 
-import General.UnitWrapper;
-import com.orbischallenge.firefly.objects.enums.Direction;
+import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.game.engine.Point;
 
 import java.util.List;
@@ -10,17 +8,13 @@ public class FollowPathMission extends Mission {
 
     private List<Point> path;
 
-    public FollowPathMission(List<Point> path) {
+    public FollowPathMission(List<Point> path, Tile t, float p) {
+        super(t,p);
         this.path = path;
     }
 
     @Override
-    public void onLocationReached() {
-        setCompleted(true);
-    }
-
-    @Override
-    public Direction getMoveDirection() {
+    public Point getMovePosition() {
         return null;
     }
 

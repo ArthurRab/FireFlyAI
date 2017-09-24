@@ -1,7 +1,4 @@
-package MissionTypes;
 
-import General.PlayerAI;
-import General.UnitWrapper;
 import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.firefly.objects.enums.Direction;
 import com.orbischallenge.game.engine.Point;
@@ -22,25 +19,13 @@ public class GoToLocationMission extends Mission {
     }
 
     @Override
-    public void onLocationReached() {
-        setCompleted(true);
-    }
-
-    @Override
-    public Point getMoveDirection() {
+    public Point getMovePosition() {
         Point playerPos = getWorker().getPosition();
-        int index = 0;
-        for (int i = 0; i < path.size(); i++) {
-            if (playerPos.equals(path.get(i))) {
-                index = i;
-                break;
-            }
-        }
-
-
+        int index = path.indexOf(playerPos);
         path = path.subList(index, path.size());
 
         if (path.size() == 1) {
+            setCompleted(true);
             return playerPos;
         }
 
