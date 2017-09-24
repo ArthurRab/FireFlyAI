@@ -13,7 +13,7 @@ public class PlayerAI {
 
     public static World world;
     public static UnitWrapper[] friendlyUnits;
-    public static Collection<Point> AVOID_AT_COSTS;
+    public static Collection<Point> AVOID_AT_ALL_COSTS;
 
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
 
