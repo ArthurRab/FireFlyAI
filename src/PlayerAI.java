@@ -52,10 +52,6 @@ public class PlayerAI {
                 w = new UnitWrapper(f.getUuid());
                 unitIDToWrapper.put(f.getUuid(), w);
             }
-            else{
-                w.setUnit(f);
-            }
-
             PlayerAI.friendlyUnits.add(w);
         }
 
@@ -80,12 +76,11 @@ public class PlayerAI {
         System.out.println(MissionManager.getInstance().pendingMissions.size());
         System.out.println(MissionManager.getInstance().saveForLater.size());
 
-<<<<<<< HEAD
-        System.out.println(PlayerAI.friendlyUnits.length);
+        System.out.println(PlayerAI.friendlyUnits.size());
 
 
-        for (FriendlyUnit u: friendlyUnits){
-            if (u.getLastMoveResult() == MoveResult.MOVE_SUCCESS){
+        for (FriendlyUnit u : friendlyUnits) {
+            if (u.getLastMoveResult() == MoveResult.MOVE_SUCCESS) {
                 System.out.println("OVER HERE:");
                 System.out.println(u.getUuid());
                 System.out.println(u.getPosition());
@@ -93,12 +88,7 @@ public class PlayerAI {
             }
         }
 
-        for (UnitWrapper i:PlayerAI.friendlyUnits) {
-
-=======
-        System.out.println(PlayerAI.friendlyUnits.size());
         for (UnitWrapper i : PlayerAI.friendlyUnits) {
->>>>>>> origin/master
             i.update();
         }
 
