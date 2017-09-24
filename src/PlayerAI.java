@@ -46,8 +46,7 @@ public class PlayerAI {
 
 
         PlayerAI.friendlyUnits.clear();
-        for (int i = 0; i < friendlyUnits.length; i++) {
-            FriendlyUnit f = friendlyUnits[i];
+        for (FriendlyUnit f : friendlyUnits) {
             UnitWrapper w = unitIDToWrapper.getOrDefault(f.getUuid(), null);
             if (w == null) {
                 w = new UnitWrapper(f.getUuid());

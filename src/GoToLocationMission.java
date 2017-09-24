@@ -1,13 +1,11 @@
 
 import com.orbischallenge.firefly.client.objects.models.Tile;
-import com.orbischallenge.firefly.objects.enums.Direction;
 import com.orbischallenge.game.engine.Point;
 
 import java.util.List;
 
 public class GoToLocationMission extends Mission {
     List<Point> path;
-    List<Direction> directions;
 
     public GoToLocationMission(Tile d, float p) {
         super(d, p);
