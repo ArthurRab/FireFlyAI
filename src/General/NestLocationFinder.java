@@ -17,8 +17,11 @@ public class NestLocationFinder {
 
         ArrayList nests = new ArrayList<Point>();
         ArrayList visited = new ArrayList<Point>();
+        nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+        visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
+        int initLen = nests.size();
         int counter = 0;
-        while (nests.size() < numNests && counter < 10){
+        while (nests.size() < initLen + numNests && counter < 10){
             Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
             visited.add(newPoint);
             nests.add(newPoint);
