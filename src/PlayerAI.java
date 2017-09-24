@@ -4,10 +4,7 @@ import com.orbischallenge.firefly.client.objects.models.World;
 import com.orbischallenge.firefly.objects.enums.MoveResult;
 import com.orbischallenge.game.engine.Point;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class PlayerAI {
     // Any field declarations go here
@@ -19,7 +16,7 @@ public class PlayerAI {
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
 
     NestLocationFinder nlf = new NestLocationFinder();
-    ArrayList<Point> nests;
+    List<Point> nests;
 
     FriendlyUnit pilot = null;
 
@@ -64,16 +61,27 @@ public class PlayerAI {
                 unitIDToWrapper.remove(i);
             }
         }
+
         //if (MissionManager.getInstance().pendingMissions.isEmpty() && MissionManager.getInstance().saveForLater.isEmpty()){
         if (turns <= 0){
-            AVOID_AT_ALL_COSTS.add(world.getFriendlyNestPositions()[0]);
-            nests = nlf.findNestLocations(PlayerAI.world, world.getFriendlyNestPositions()[0], 8);
+            Point start = world.getFriendlyNestPositions()[0];
+            AVOID_AT_ALL_COSTS.add(start);
+            nests = nlf.findNestLocations(PlayerAI.world,start, 20);
+            Collections.sort(nests, (o1, o2) -> {
+                Point diff1 = o1.subtract(start).getMod(world.getWidth(), world.getHeight()),
+                diff2 = o2.subtract(start).getMod(world.getWidth(), world.getHeight());
+                return Math.max(Math.abs(diff1.getX()), Math.abs(diff1.getY()))
+                        - Math.max(Math.abs(diff2.getX()), Math.abs(diff2.getY()));
+            });
+            nests = nests.subList(0,8);
             AVOID_AT_ALL_COSTS.addAll(nests);
             for (Point p : nlf.getNeighbours(world, nests)) {
                 MissionManager.getInstance().addMission(new FillLocationMission(world.getTileAt(p), 1f));
 
             }
-            System.out.println(MissionManager.getInstance().pendingMissions.size());
+            //System.out.println(MissionManager.getInstance().pendingMissions.size());
+            //System.out.println("NESTS:");
+            //for (Point m: nests) System.out.println(m);
             //for (Mission m: MissionManager.getInstance().pendingMissions) System.out.println(m.getDestination());
             System.out.println();
         }
@@ -82,11 +90,11 @@ public class PlayerAI {
         MissionManager.getInstance().distributeMissions();
         System.out.println(MissionManager.getInstance().pendingMissions.size());
         System.out.println(MissionManager.getInstance().saveForLater.size());
-        System.out.println("==DESTS==");
-        for (Mission m: MissionManager.getInstance().saveForLater){
-            System.out.println(m.getDestination());
-        }
-        System.out.println();
+        //System.out.println("==DESTS==");
+        //for (Mission m: MissionManager.getInstance().saveForLater){
+         //   System.out.println(m.getDestination());
+        //}
+        //System.out.println();
 
         System.out.println(PlayerAI.friendlyUnits.size());
 
@@ -102,7 +110,7 @@ public class PlayerAI {
 */
 
         for (UnitWrapper i : PlayerAI.friendlyUnits) {
-            if (i.getMission() == null){
+            /*if (i.getMission() == null){
                 System.out.println("INACTIVE");
                 System.out.println(i.getPosition());
                 System.out.println();
@@ -111,7 +119,7 @@ public class PlayerAI {
                 System.out.println("ACTIVE");
                 System.out.println(((GoToLocationMission) i.getMission()).getPath());
                 System.out.println();
-            }
+            }*/
             i.update();
         }
 
