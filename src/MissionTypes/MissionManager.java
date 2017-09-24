@@ -50,6 +50,7 @@ public class MissionManager {
             UnitWrapper chosenOne = m.chooseUnit(applicants);
 
             chosenOne.setMission(m);
+            m.onStart();
         }
     }
 

@@ -2,7 +2,7 @@ package MissionTypes;
 
 import General.UnitWrapper;
 import com.orbischallenge.firefly.client.objects.models.Tile;
-import com.orbischallenge.firefly.objects.enums.Direction;
+import com.orbischallenge.game.engine.Point;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,7 +34,7 @@ public abstract class Mission implements Comparator<UnitWrapper> {
 
     public abstract void onLocationReached();
 
-    public abstract Direction getMoveDirection();
+    public abstract Point getMoveDirection();
 
 
     public UnitWrapper chooseUnit(List<UnitWrapper> u) {
@@ -42,7 +42,15 @@ public abstract class Mission implements Comparator<UnitWrapper> {
             return null;
         }
 
-        return Collections.max(u, this);
+
+        UnitWrapper best = Collections.max(u, this);
+
+        for (UnitWrapper unit : u) {
+            unit.comparisonValues.clear();
+        }
+
+
+        return best;
     }
 
     public Tile getDestination() {

@@ -1,7 +1,7 @@
 package MissionTypes;
 
 import General.UnitWrapper;
-import com.orbischallenge.firefly.objects.enums.Direction;
+import com.orbischallenge.game.engine.Point;
 
 public class HoldPositionMission extends GoToLocationMission {
 
@@ -11,7 +11,7 @@ public class HoldPositionMission extends GoToLocationMission {
     }
 
     @Override
-    public Direction getMoveDirection() {
+    public Point getMoveDirection() {
         return super.getMoveDirection();
     }
 

@@ -4,12 +4,15 @@ import MissionTypes.Mission;
 import com.orbischallenge.firefly.client.objects.models.Unit;
 import com.orbischallenge.game.engine.Point;
 
+import java.util.ArrayList;
+
 public class UnitWrapper {
     private Mission mission;
     private Unit unit;
+    public ArrayList<Float> comparisonValues;
 
     public UnitWrapper() {
-
+        comparisonValues = new ArrayList<>();
     }
 
     public UnitWrapper(Unit unit) {
