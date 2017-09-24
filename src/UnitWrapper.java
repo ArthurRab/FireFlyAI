@@ -26,6 +26,7 @@ public class UnitWrapper {
         mission.setWorker(this);
     }
 
+
     public boolean willTakeMission(Mission m) {
         return mission == null || m.getPriority() > mission.getPriority();
     }
@@ -36,8 +37,14 @@ public class UnitWrapper {
         m.onDelete();
     }
 
+<<<<<<< HEAD
     private FriendlyUnit getUnit() {
         return PlayerAI.world.getUnit(unitID);
+=======
+
+    public FriendlyUnit getUnit() {
+        return unit;
+>>>>>>> origin/master
     }
 
 

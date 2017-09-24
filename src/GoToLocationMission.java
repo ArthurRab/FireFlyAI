@@ -22,8 +22,17 @@ public class GoToLocationMission extends Mission {
     public Point getMovePosition() {
         Point playerPos = getWorker().getPosition();
         int index = path.indexOf(playerPos);
+        /*
+        System.out.println();
+        System.out.println(getWorker().getUnit().getUuid());
+        System.out.println(getWorker().getPosition());
+        System.out.println(path);
+        System.out.println(index);
         path = path.subList(index, path.size());
-
+        System.out.println(path);
+        System.out.println(path.get(1));
+        System.out.println();
+        */
         if (path.size() == 1) {
             setCompleted(true);
             return playerPos;
