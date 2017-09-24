@@ -8,11 +8,11 @@ public class MissionPriorityComparator implements Comparator<Mission> {
         float temp = (o1.getPriority() - o2.getPriority());
 
         if (temp > 0) {
-            return 1;
+            return -1;
         } else if (temp == 0) {
             return 0;
         } else {
-            return -1;
+            return 1;
         }
     }
 }

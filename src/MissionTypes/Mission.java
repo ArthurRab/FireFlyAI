@@ -16,12 +16,19 @@ public abstract class Mission implements Comparator<UnitWrapper> {
     private boolean completed = false;
 
 
-    float priority;
-    Tile destination;
+    private float priority;
+    private Tile destination;
+
+
+    private UnitWrapper worker;
 
     public void onDelete() {
         if (!completed)
             MissionManager.getInstance().addMission(this);
+    }
+
+    public void onStart() {
+
     }
 
 
@@ -30,10 +37,6 @@ public abstract class Mission implements Comparator<UnitWrapper> {
     public abstract Direction getMoveDirection();
 
 
-    public float getPriority() {
-        return priority;
-    }
-
     public UnitWrapper chooseUnit(List<UnitWrapper> u) {
         if (u.isEmpty()) {
             return null;
@@ -41,5 +44,38 @@ public abstract class Mission implements Comparator<UnitWrapper> {
 
         return Collections.max(u, this);
     }
+
+    public Tile getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Tile destination) {
+        this.destination = destination;
+    }
+
+    public float getPriority() {
+        return priority;
+    }
+
+    public void setPriority(float priority) {
+        this.priority = priority;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public UnitWrapper getWorker() {
+        return worker;
+    }
+
+    public void setWorker(UnitWrapper worker) {
+        this.worker = worker;
+    }
+
 
 }

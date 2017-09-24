@@ -3,7 +3,9 @@ package General;
 import com.orbischallenge.firefly.client.objects.models.EnemyUnit;
 import com.orbischallenge.firefly.client.objects.models.FriendlyUnit;
 import com.orbischallenge.firefly.client.objects.models.World;
+import com.orbischallenge.game.engine.Point;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class PlayerAI {
@@ -11,6 +13,7 @@ public class PlayerAI {
 
     public static World world;
     public static UnitWrapper[] friendlyUnits;
+    public static Collection<Point> AVOID_AT_COSTS;
 
     HashMap<String, UnitWrapper> unitIDToWrapper = new HashMap<String, UnitWrapper>();
 

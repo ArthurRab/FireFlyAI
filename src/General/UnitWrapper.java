@@ -2,6 +2,7 @@ package General;
 
 import MissionTypes.Mission;
 import com.orbischallenge.firefly.client.objects.models.Unit;
+import com.orbischallenge.game.engine.Point;
 
 public class UnitWrapper {
     private Mission mission;
@@ -21,10 +22,17 @@ public class UnitWrapper {
 
     public void setMission(Mission mission) {
         this.mission = mission;
+        mission.setWorker(this);
     }
 
     public boolean willTakeMission(Mission m) {
-        return m.getPriority() >= mission.getPriority();
+        return m == null || m.getPriority() >= mission.getPriority();
+    }
+
+    public void deleteMission() {
+        Mission m = this.mission;
+        this.mission = null;
+        m.onDelete();
     }
 
 
@@ -34,5 +42,13 @@ public class UnitWrapper {
 
     public void setUnit(Unit unit) {
         this.unit = unit;
+    }
+
+    public int getHealth() {
+        return unit.getHealth();
+    }
+
+    public Point getPosition() {
+        return getPosition();
     }
 }
