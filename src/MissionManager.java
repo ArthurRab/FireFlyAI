@@ -20,8 +20,8 @@ public class MissionManager {
         pendingMissions = saveForLater;
         saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
     }
-    public PriorityQueue<Mission> pendingMissions = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
-    public PriorityQueue<Mission> saveForLater = new PriorityQueue<Mission>(1, new MissionPriorityComparator());
+    public PriorityQueue<Mission> pendingMissions = new PriorityQueue<>(1, new MissionPriorityComparator());
+    public PriorityQueue<Mission> saveForLater = new PriorityQueue<>(1, new MissionPriorityComparator());
 
     public void addMission(Mission m) {
         pendingMissions.add(m);
@@ -30,7 +30,7 @@ public class MissionManager {
     public void distributeMissions() {
         while (!pendingMissions.isEmpty()) {
             Mission m = pendingMissions.poll();
-            ArrayList<UnitWrapper> applicants = new ArrayList<UnitWrapper>();
+            ArrayList<UnitWrapper> applicants = new ArrayList<>();
             for (UnitWrapper u : PlayerAI.friendlyUnits) {
                 if (u.willTakeMission(m)) {
                     applicants.add(u);
@@ -39,6 +39,8 @@ public class MissionManager {
 
             if (applicants.isEmpty()) {
                 saveForLater.add(m);
+                saveForLater.addAll(pendingMissions);
+                pendingMissions.clear();
             }else {
 
                 UnitWrapper chosenOne = m.chooseUnit(applicants);

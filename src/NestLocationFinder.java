@@ -1,3 +1,4 @@
+import com.orbischallenge.firefly.client.objects.models.Tile;
 import com.orbischallenge.firefly.client.objects.models.World;
 
 import com.orbischallenge.game.engine.Point;
@@ -10,7 +11,7 @@ public class NestLocationFinder {
     public ArrayList<Point> findNestLocations(World world, Point start, int numNests){
 
         ArrayList nests = new ArrayList<Point>();
-        ArrayList visited = new ArrayList<Point>();
+        HashSet<Point> visited = new HashSet<>();
         if (PlayerAI.AVOID_AT_ALL_COSTS != null) {
             nests.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
             visited.addAll(PlayerAI.AVOID_AT_ALL_COSTS);
@@ -18,7 +19,15 @@ public class NestLocationFinder {
         int initLen = nests.size();
         int counter = 0;
         while (nests.size() < initLen + numNests && counter < 10){
-            Point newPoint = world.getClosestNeutralTileFrom(start, visited).getPosition();
+
+            Tile t = world.getClosestNeutralTileFrom(start, visited);
+            if (t == null){
+                System.out.println(start);
+                System.out.print("VISTIED: ");
+                System.out.println(visited.size());
+                return nests;
+            }
+            Point newPoint = t.getPosition();
             visited.add(newPoint);
             nests.add(newPoint);
             int pathSum = 0;
@@ -27,7 +36,10 @@ public class NestLocationFinder {
                 Point a = newPoint.add(d.getDirectionDelta()).getMod(world.getWidth(), world.getHeight());
                 if (!world.isWall(a) && !world.getTileAt(a).isFriendly()){
                     List l = world.getShortestPath(start, a, nests);
-                    if (l == null) fail = true;
+                    if (l == null) {
+                        fail = true;
+                        break;
+                    }
                     pathSum += l.size();
                 }
             }

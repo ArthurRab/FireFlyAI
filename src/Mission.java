@@ -44,11 +44,16 @@ public abstract class Mission implements Comparator<UnitWrapper> {
 
 
         UnitWrapper best = Collections.max(u, this);
+        Collections.sort(u, this);
 
+        System.out.print("CALL FOR POSITION: ");
+        System.out.println(getDestination());
         for (UnitWrapper unit : u) {
-            if (unit == null) System.out.println("GI");
+            //if (unit == null) System.out.println("GI");
+            System.out.println(unit.getPosition());
             unit.comparisonValues.clear();
         }
+        System.out.println();
 
 
         return best;
