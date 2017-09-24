@@ -64,7 +64,7 @@ public class NestLocationFinder {
             }
         }
         paths.removeAll(removedPaths);
-
+        paths.sort((o1, o2) -> o2.size() - o1.size());
         return paths;
     }
 
