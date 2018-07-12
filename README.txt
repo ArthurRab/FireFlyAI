@@ -1,3 +1,9 @@
+This was for an ai hackathon at the University of Toronto called 'Orbis Challenge'
+
+The idea being this is a framework which uses priority based mission delegation to help connect the low level movement of individual units in a swarm and high level goal setting.
+
+Original text from the hackathon:
+
 Hi, there!
 
 Thanks for participating in this year's Orbis Challenge!
